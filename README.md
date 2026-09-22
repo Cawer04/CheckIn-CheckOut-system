@@ -15,3 +15,12 @@ som f.eks.: git commit -m "Har oprettet en WriteLine"
 
 efter det, skal i skrive: git push
 som skubber den ud til github og gør at vi kan se opdateringen
+
+for at kunne se opdateringer i Visual Studio skal i åbne mappen i oprettede.
+Dernæst skal i højre clicke og åbne git bash
+og skrive: git pull   
+Med den kommando hiver i opdateringen fra github ind i jeres mappe hvor
+i åbner koden der igennem
+
+Håber noten kan bruges! opdatere den nok løbende, hvis jeg kommer i tanke om noget
+eller hvis jeg ændre forklaringer

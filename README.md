@@ -4,11 +4,12 @@ Jeg har kaldt den for "CheckIn-CheckOut-system"
 
 Højre click i mappen og vælg "git bash"
 
-Brug denne kommando git clone https://github.com/Cawer04/CheckIn-CheckOut-system.git
+Brug denne kommando: git clone https://github.com/Cawer04/CheckIn-CheckOut-system.git
 for at klone projektet
 
 Hvis i har ændret noget i koden som f.eks. skreve en WriteLine, tilføjet en klasse osv
-skal i skrive: git add .  i git bash
+skal i skrive: git add .  
+i git bash (ja der skal være et punktum)
 Efter det, kan i skrive en kommentar før opdateringen bliver smidt på github
 som f.eks.: git commit -m "Har oprettet en WriteLine" 
 

@@ -16,7 +16,7 @@ namespace Hydac
             employeeName = EmployeeName;
             this.guests = new Guest[maxGuests]; //opretter arrayet med den faste størrelse
             this.guestCount = 0; //Antal gæster starter på 0
-            
+
         }
         public string GetEmployeeName()
         {
@@ -46,8 +46,8 @@ namespace Hydac
 
             for (int i = 0; i < guestCount; i++)
             {
-               
-                Console.WriteLine($"{i+1}. Navn: {guests[i].GetName()}");
+
+                Console.WriteLine($"{i + 1}. Navn: {guests[i].GetName()}");
             }
         }
 

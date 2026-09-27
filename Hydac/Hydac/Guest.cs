@@ -11,7 +11,8 @@ namespace Hydac
         private int arrivalHour;
         private int arrivalMinute;
 
-        
+        private int departureHour;
+        private int departureMinute;
 
         public void SetName(string name)
         {
@@ -45,7 +46,22 @@ namespace Hydac
         {
             return arrivalMinute;
         }
-
+        public int GetDepartureHour()
+        {
+            return departureHour;
+        }
+        public void SetDepartureHour(int departureHour)
+        {
+            this.departureHour = departureHour;
+        }
+        public void SetDepartureMinute(int departureMinute)
+        {
+            this.departureMinute = departureMinute;
+        }
+        public int GetDepartureMinute()
+        {
+            return departureMinute;
+        }
 
     }
 }

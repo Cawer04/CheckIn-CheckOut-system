@@ -4,20 +4,22 @@ using System.Text;
 
 namespace Hydac
 {
-    internal class Employee
+    public class Employee
     {
-
+        //private fields
+        //Andre klasser kan ikke ændre på dem 
         private string employeeName;
         private Guest[] guests; //Array til at gemme gæsterne
         private int guestCount; //Holder styr på hvor mange gæster der er oprettet
 
         public Employee(string EmployeeName, int maxGuests)
         {
-            employeeName = EmployeeName;
+            this.employeeName = EmployeeName;
             this.guests = new Guest[maxGuests]; //opretter arrayet med den faste størrelse
             this.guestCount = 0; //Antal gæster starter på 0
 
         }
+        //property til vores employees navn
         public string GetEmployeeName()
         {
             return employeeName;
@@ -71,7 +73,7 @@ namespace Hydac
         public void PrintGuests()
         {
             //  Udskriv overskriften med medarbejderens navn
-            Console.WriteLine($"---Gæsteliste for {employeeName}---");
+            Console.WriteLine($"---Gæsteliste---");
 
             //  Tjek om der overhovedet er nogle gæster på listen endnu
             if (guestCount == 0)
@@ -83,9 +85,9 @@ namespace Hydac
             //  Gå igennem alle registrerede gæster en efter en ved hjælp af et for-loop
             for (int i = 0; i < guestCount; i++)
             {
-                //  Udskriv gæstens nummer (i + 1), navn, firma og ankomsttid (time og minut)
+                //  Udskriv gæstens nummer (i + 1), navn, firma og ankomsttid (time og minut) og viser hvem den ansvarlige medarbejder er til gæsten
                 Console.WriteLine($"{i + 1}. Navn: {guests[i].GetName()} | Firma: {guests[i].GetCompany()} " +
-                    $"| Ankomstid: {guests[i].GetArrivalHour()}.{guests[i].GetArrivalMinute()} ");
+                    $"| Ankomstid: {guests[i].GetArrivalHour()}.{guests[i].GetArrivalMinute()} | Ansvarlig medarbejder: {employeeName} ");
             }
         }
 

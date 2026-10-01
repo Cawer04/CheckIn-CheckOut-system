@@ -6,13 +6,17 @@ namespace Hydac
 {
     public class Guest
     {
+        //private fields
+        //Andre klasser kan ikke få i dem og ændre dem
         private string guestName;
         private string company;
         private int arrivalHour;
         private int arrivalMinute;
-
+   
         private int departureHour;
         private int departureMinute;
+
+        //Properties til vores gæst i form af Get og Set.
 
         public void SetName(string name)
         {

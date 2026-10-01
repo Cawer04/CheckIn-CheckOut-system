@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Hydac
 {
@@ -6,14 +7,13 @@ namespace Hydac
     {
         static void Main(string[] args)
         {
-            Guest guest = new Guest();
 
-            Employee employee = new Employee("Peter", 10);
-
+            Employee employee = new Employee("Peter Jensen", 10);
+        
 
             bool kører = true;
-
-            while (kører)
+           
+            while (kører)//loop der fortsætter med at kører programmet så længe "kører" er true
             {
 
                 Console.WriteLine("===Vælg hvad du vil===");
@@ -21,7 +21,7 @@ namespace Hydac
                 Console.WriteLine("2. Se liste over gæster");
                 Console.WriteLine("3. Tjek gæst ud");
                 string valg = Console.ReadLine();
-
+                Console.Clear();
                 if (valg == "1")
                 {
                     //opret en ny gæst instans
@@ -31,7 +31,8 @@ namespace Hydac
                     newGuest.SetName(Console.ReadLine());
                     //Sørger for at employee kan tilføje en gæst
                     employee.AddGuest(newGuest);
-                    Console.WriteLine("Gæest tilføjet");
+                    Console.WriteLine("Gæst tilføjet");
+
 
                     Console.WriteLine("Indtast navn på firma");
                     newGuest.SetCompany(Console.ReadLine());
@@ -46,13 +47,14 @@ namespace Hydac
 
                 else if (valg == "2")
                 {
+                    //Kalder PrintGuests metoden som viser gæste listen
                     employee.PrintGuests();
                 }
                 else if (valg == "3")
                 {
                     bool udtjekningKører = true;
 
-                    while (udtjekningKører)
+                    while (udtjekningKører) //loop til udtjekning som kører så længe "udtjekningKører" er true
                     {
                         employee.PrintGuests();
 
@@ -84,6 +86,8 @@ namespace Hydac
 
                                 if (choice == "ja")
                                 {
+                                    //try catch bliver bruget her i tilfælde af at der kommer noget ugyldigt. i stedet for at crash
+                                    //bilver den catched, hvor man bliver smidt tilbage til at tjekke ud
                                    try
                                     {
                                         

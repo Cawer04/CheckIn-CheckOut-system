@@ -9,10 +9,10 @@ namespace Hydac
         {
 
             Employee employee = new Employee("Peter Jensen", 10);
-        
+
 
             bool kører = true;
-           
+
             while (kører)//loop der fortsætter med at kører programmet så længe "kører" er true
             {
 
@@ -22,107 +22,113 @@ namespace Hydac
                 Console.WriteLine("3. Tjek gæst ud");
                 string valg = Console.ReadLine();
                 Console.Clear();
-                if (valg == "1")
+                switch (valg)
                 {
-                    //opret en ny gæst instans
-                    Guest newGuest = new Guest();
+                    case "1":
+                        // Opret en ny gæst instans
+                        Guest newGuest = new Guest();
 
-                    Console.WriteLine("Indtast gæstens navn");
-                    newGuest.SetName(Console.ReadLine());
-                    //Sørger for at employee kan tilføje en gæst
-                    employee.AddGuest(newGuest);
-                    Console.WriteLine("Gæst tilføjet");
+                        Console.WriteLine("Indtast gæstens navn");
+                        newGuest.SetName(Console.ReadLine());
+                        // Sørger for at employee kan tilføje en gæst
+                        employee.AddGuest(newGuest);
+                        Console.WriteLine("Gæst tilføjet");
 
+                        Console.WriteLine("Indtast navn på firma");
+                        newGuest.SetCompany(Console.ReadLine());
 
-                    Console.WriteLine("Indtast navn på firma");
-                    newGuest.SetCompany(Console.ReadLine());
+                        Console.WriteLine("Indtast ankomst timetal");
+                        newGuest.SetArrivalHour(int.Parse(Console.ReadLine()));
+                        Console.WriteLine("Indtast ankomst minuttal");
+                        newGuest.SetArrivalMinute(int.Parse(Console.ReadLine()));
+                        break;
 
-                    Console.WriteLine("Indtast ankomst timetal");
-                    newGuest.SetArrivalHour(int.Parse(Console.ReadLine()));
-                    Console.WriteLine("Indtast ankomst minuttal");
-                    newGuest.SetArrivalMinute(int.Parse(Console.ReadLine()));
-                }
-
-
-
-                else if (valg == "2")
-                {
-                    //Kalder PrintGuests metoden som viser gæste listen
-                    employee.PrintGuests();
-                }
-                else if (valg == "3")
-                {
-                    bool udtjekningKører = true;
-
-                    while (udtjekningKører) //loop til udtjekning som kører så længe "udtjekningKører" er true
-                    {
+                    case "2":
+                        // Kalder PrintGuests metoden som viser gæstelisten
                         employee.PrintGuests();
+                        break;
 
-                        // Gør det helt tydeligt, at man kan trykke 0 for at fortryde
-                        Console.WriteLine("\nIndtast nummer på den gæst du vil tjekke ud");
-                        Console.WriteLine("(Eller tryk '0' for at gå tilbage til hovedmenuen):");
-                        string input = Console.ReadLine();
+                    case "3":
+                        bool udtjekningKører = true;
 
-                        // Hvis brugeren skriver 0, afbryder vi udtjekningen og ryger tilbage til hovedmenuen
-                        if (input == "0")
+                        while (udtjekningKører) // Loop til udtjekning som kører så længe "udtjekningKører" er true
                         {
-                            Console.WriteLine("Vender tilbage til hovedmenuen...\n");
-                            udtjekningKører = false; // Stopper udtjeknings-løkken
-                            break; // Bryder ud af while-løkken med det samme
-                        }
-                        //Forsøger at omdanne input til et heltal
-                        if (int.TryParse(input, out int valgtGæst))
-                        {
-                            //Finder den korrekte indeks i arrayet
-                            int indeks = valgtGæst - 1;
-                            //Henter gæsten via medarbejderens metode
-                            Guest guestCheckOut = employee.GetGuest(indeks);
-                            //Tjekker om gæsten findes og at pladsen ikke er tom
-                            if (guestCheckOut != null)
+                            employee.PrintGuests();
+
+                            // Gør det helt tydeligt, at man kan trykke 0 for at fortryde
+                            Console.WriteLine("\nIndtast nummer på den gæst du vil tjekke ud");
+                            Console.WriteLine("(Eller tryk '0' for at gå tilbage til hovedmenuen):");
+                            string input = Console.ReadLine();
+
+                            // Hvis brugeren skriver 0, afbryder vi udtjekningen og ryger tilbage til hovedmenuen
+                            if (input == "0")
                             {
-                                //spørger om medarbejderen vil bekræfte udtjekning
-                                Console.WriteLine($"Vil du melde {guestCheckOut.GetName()} ud? (ja/nej)");
-                                string choice = Console.ReadLine();
+                                Console.WriteLine("Vender tilbage til hovedmenuen...\n");
+                                udtjekningKører = false; // Stopper udtjeknings-løkken
+                                break; // Bryder ud af while-løkken med det samme
+                            }
 
-                                if (choice == "ja")
+                            // Forsøger at omdanne input til et heltal
+                            if (int.TryParse(input, out int valgtGæst))
+                            {
+                                // Finder det korrekte indeks i arrayet
+                                int indeks = valgtGæst - 1;
+                                // Henter gæsten via medarbejderens metode
+                                Guest guestCheckOut = employee.GetGuest(indeks);
+
+                                // Tjekker om gæsten findes og at pladsen ikke er tom
+                                if (guestCheckOut != null)
                                 {
-                                    //try catch bliver bruget her i tilfælde af at der kommer noget ugyldigt. i stedet for at crash
-                                    //bilver den catched, hvor man bliver smidt tilbage til at tjekke ud
-                                   try
-                                    {
-                                        
-                                        //Fjerner gæsten fra arrayet og udskriver bekræfteslse
-                                        employee.RemoveGuest(indeks);
-                                        Console.WriteLine($"{guestCheckOut.GetName()} er nu tjekket ud");
+                                    // Spørger om medarbejderen vil bekræfte udtjekning
+                                    Console.WriteLine($"Vil du melde {guestCheckOut.GetName()} ud? (ja/nej)");
+                                    string choice = Console.ReadLine();
 
-                                        
-                                    }
-                                    catch
+                                    if (choice == "ja")
                                     {
-                                        Console.WriteLine("Fejl: Du skal indtaste et gyldigt tal");
+                                        // Try-catch bruges her i tilfælde af fejl
+                                        try
+                                        {
+                                            // Fjerner gæsten fra arrayet og udskriver bekræftelse
+                                            employee.RemoveGuest(indeks);
+                                            Console.WriteLine($"{guestCheckOut.GetName()} er nu tjekket ud");
+                                        }
+                                        catch
+                                        {
+                                            Console.WriteLine("Fejl: Nog gik galt under udtjekning");
+                                        }
+                                    }
+                                    else if (choice == "nej")
+                                    {
+                                        Console.WriteLine("Udtjekning annulleret. Vender tilbage til gæstelisten...\n");
                                     }
                                 }
-                                else if (choice == "nej")
+                                else
                                 {
-                                    Console.WriteLine("Udtjekning annulleret. Vender tilbage til gæstelisten...\n");
-                                    // Her fortsætter løkken bare, så man kan se listen og vælge igen (eller trykke 0)
+                                    Console.WriteLine("Ugyldigt gæstenummer. Prøv igen.\n");
                                 }
                             }
                             else
                             {
-                                Console.WriteLine("Ugyldigt gæstenummer. Prøv igen.\n");
+                                Console.WriteLine("Fejl: Du skal indtaste et gyldigt tal\n");
                             }
                         }
-                    }
+                        break;
+
+                    default:
+                        Console.WriteLine("Ugyldigt valg. Prøv igen.");
+                        break;
                 }
-
             }
-
-
-
-
-
-
         }
     }
+
 }
+
+
+
+
+
+
+
+
+
